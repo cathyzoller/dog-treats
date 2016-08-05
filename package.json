@@ -1,7 +1,7 @@
 {
-  "name": "spoke",
+  "name": "dog-treats",
   "version": "1.0.0",
-  "description": "Spoke",
+  "description": "Give your dog a bone",
   "main": "src/server",
   "engines": {
     "node": "6.2.2",
@@ -22,25 +22,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saikat/react-apollo-starter-kit.git"
+    "url": "git+https://github.com/cathyzoller/dog-treats.git"
   },
   "keywords": [
-    "spoke",
-    "sms",
-    "texting",
-    "campaigns",
-    "campaigning",
-    "politics",
-    "activism",
-    "organizing",
-    "field"
+    "apollo-client",
+    "graphql",
+    "react",
+    "redux"
   ],
   "author": "Saikat Chakrabarti",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/saikat/spoke/issues"
+    "url": "https://github.com/cathyzoller/dog-treats/issues"
   },
-  "homepage": "https://github.com/saikat/saikat/spoke/#readme",
+  "homepage": "https://github.com/cathyzoller/dog-treats/#readme",
   "dependencies": {
     "aphrodite": "^0.4.1",
     "apollo-client": "^0.3.29",

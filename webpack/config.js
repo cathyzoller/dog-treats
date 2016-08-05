@@ -21,7 +21,7 @@ if (!DEBUG) {
 
 const config = {
   entry: {
-    bundle: ['babel-polyfill', './src/client/index.jsx']
+    bundle: ['babel-polyfill', './src/index.jsx']
   },
   module: {
     noParse: [],
