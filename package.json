@@ -62,7 +62,6 @@
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.5",
     "redux-thunk": "^2.1.0",
-    "rollbar": "^0.6.2",
     "thinky": "^2.3.3",
     "webpack": "^1.13.1",
     "webpack-manifest-plugin": "^1.0.1"
@@ -70,6 +69,7 @@
   "devDependencies": {
     "babel-eslint": "^6.1.2",
     "babel-register": "^6.9.0",
+    "casual": "^1.5.3",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.10.2",
