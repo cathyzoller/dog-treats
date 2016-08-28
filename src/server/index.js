@@ -15,7 +15,7 @@ process.on('uncaughtException', (ex) => {
 
 const app = express()
 // Heroku requires you to use process.env.PORT
-const port = process.env.DEV_APP_PORT || process.env.PORT
+const port = process.env.DEV_APP_PORT || 8080
 // Don't rate limit heroku
 app.enable('trust proxy')
 
