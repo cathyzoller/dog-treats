@@ -1,7 +1,18 @@
+const path = require('path')
 const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
+require('babel-polyfill');
+require('dotenv').load({ path: '.env' });
 
 const DEBUG = process.env.NODE_ENV !== 'production'
+console.log('process env', process.env.ASSETS_DIR)
+
+const PATHS = {
+  app: path.join(__dirname, '../', 'src'),
+  build: path.join(__dirname, '../', process.env.ASSETS_DIR)
+};
+
+console.log('build path', PATHS.build)
 
 const plugins = [
   new webpack.DefinePlugin({
@@ -21,10 +32,12 @@ if (!DEBUG) {
 
 const config = {
   entry: {
-    bundle: ['babel-polyfill', './src/index.jsx']
+    bundle: ['babel-polyfill', path.join(__dirname, '../', 'src', 'index.jsx')]
   },
   module: {
-    noParse: [],
+    noParse: [
+      //eg  /\/libphonenumber\.js$/ (pre-built & minified js files)
+    ],
     loaders: [
       { test: /\.json$/, loader: 'json' },
       { test: /\.css$/, loader: 'style!css' },
@@ -39,12 +52,13 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    root: PATHS.app
   },
   plugins,
   output: {
     filename: outputFile,
-    path: DEBUG ? '/' : assetsDir,
+    path: PATHS.build,
     publicPath: '/assets/'
   }
 }

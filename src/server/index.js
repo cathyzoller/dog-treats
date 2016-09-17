@@ -6,6 +6,7 @@ import appRenderer from './middleware/app-renderer'
 import { apolloServer } from 'apollo-server'
 import { schema, resolvers } from './api/schema'
 import mocks from './api/mocks'
+require('dotenv').load({ path: '.env' });
 
 process.on('uncaughtException', (ex) => {
   log.error(ex)
