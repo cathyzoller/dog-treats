@@ -5,16 +5,21 @@ const styles = StyleSheet.create({
   navBar: {
     backgroundColor: 'white',
     borderBottom: '1px grey solid',
-    height: '40px',
+    fontSize: '18px',
+    height: '45px',
+    paddingTop: '20px',
+    textAlign: 'center',
+    textTransform: 'uppercase',
     width: '100%'
   }
 })
 
 export default function App({ children }) {
+  console.log('children', children);
   return (
     <div>
       <div className={css(styles.navBar)}>
-        DogTreats
+        Dog Treats
       </div>
       {children}
     </div>
