@@ -2,15 +2,19 @@ import { schema as countSchema, resolvers as countResolvers } from './count'
 import Data from './data'
 
 const rootSchema = `
-  type allOwners {
+  type AllOwners {
     owners: [Owner]
+  }
+
+  type AllTreats {
+    treats: [Treat]
   }
 
   type Owner {
     id: Int! # the ! means that every owner object _must_ have an id
     firstName: String
     lastName: String
-    allOwners: allOwners
+    allOwners: AllOwners
     dogs: [Dog]
   }
 
@@ -24,17 +28,20 @@ const rootSchema = `
   type Treat {
     id: Int!
     name: String
+    allTreats: AllTreats
   }
 
   type RootQuery {
     count: Count
-    allOwners: allOwners
+    allTreats: AllTreats
+    allOwners: AllOwners
     owner: Owner
     dog: Dog
   }
 
   type RootMutation {
     addCount(amount: Int!): Count
+    addTreat(name: String!): Treat
     induceError: String
   }
 
@@ -46,7 +53,8 @@ const rootSchema = `
 
 const rootResolvers = {
   RootQuery: {
-    count: () => Data.count
+    count: () => Data.count,
+    allTreats: () => Data.allTreats
   },
   RootMutation: {
     addCount(_, { amount }) {
@@ -55,6 +63,10 @@ const rootResolvers = {
     },
     induceError() {
       throw new Error('Error message')
+    },
+    addTreat(_, { name }) {
+      Data.allTreats.treats.push({ name: name })
+      return Data.allTreats
     }
   }
 }

@@ -15,9 +15,6 @@ const mocks = {
     name: () => casual.word,
     treats: () => new MockList([1,6], () => casual.word)
   }),
-  Treat: () => ({
-    name: () => casual.word
-  }),
   RootQuery: () => ({
     owner: (o, args) => {
       if (casual.integer(1,10) > 8){
