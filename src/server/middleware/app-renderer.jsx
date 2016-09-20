@@ -11,6 +11,7 @@ import Store from '../../store'
 import wrap from '../wrap'
 import fs from 'fs'
 import path from 'path'
+require('dotenv').load({ path: '.env' });
 
 let assetMap = {
   'bundle.js': 'bundle.js'

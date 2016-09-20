@@ -5,14 +5,14 @@ export default function renderIndex(html, css, assetMap, store) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>New App</title>
+    <title>Pamper your Pooch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" />
     <style data-aphrodite>${css.content}</style>
     <script>
       var _rollbarConfig = {
           accessToken: "${process.env.ROLLBAR_ACCESS_TOKEN}",
           captureUncaught: false,
-          enabled: ${process.env.NODE_ENV === 'production'},
+          enabled: false,
           payload: {
             environment: "${process.env.SOURCE_VERSION}",
             client: {

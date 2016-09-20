@@ -5,15 +5,12 @@ require('babel-polyfill');
 require('dotenv').load({ path: '.env' });
 
 const DEBUG = process.env.NODE_ENV !== 'production'
-console.log('process env', process.env.ASSETS_DIR)
 
 const PATHS = {
   app: path.join(__dirname, '../', 'src'),
   build: path.join(__dirname, '../', process.env.ASSETS_DIR)
 };
-
-console.log('build path', PATHS.build)
-
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
