@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-class DogTreats extends Component {
-  render() {
-    <div>
-      <h2> Bow Wow </h2>
-    </div>
-  }
-}
+const DogTreats = () => (
+  <div>
+    <h2> Bow Wow </h2>
+  </div>
+)
 
-export default DogTreats
+export default DogTreats;

@@ -2,7 +2,6 @@ import { ADD_COUNT } from '../actions'
 import { ADD_TREAT } from '../actions'
 
 export default (state = {}, action) => {
-  console.log('reducer state', state);
   switch (action.type) {
   case ADD_COUNT:
     return { ...state, count: action.count };

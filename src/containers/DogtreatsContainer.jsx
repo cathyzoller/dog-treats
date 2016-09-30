@@ -3,6 +3,10 @@ import { routerActions } from 'react-router-redux'
 import { connect } from 'react-apollo'
 import gql from 'graphql-tag'
 import { setTreat } from '../store/actions'
+import { StyleSheet, css } from 'aphrodite'
+
+import DogTreats from '../components/DogTreats';
+//const doggie = require('../assets/dog-1_wag.png');
 
 class DogtreatsContainer extends Component {
   static propTypes = {
@@ -37,6 +41,23 @@ class DogtreatsContainer extends Component {
   render() {
     const { data, mutations, addTreat, handleSubmit } = this.props;
     const { loading } = this.state;
+    const styles = StyleSheet.create({
+      wrapper: {
+        backgroundColor: 'white',
+        fontSize: '18px',
+        width: '100%',
+        paddingLeft: '150px',
+        paddingRight: '150px'
+      },
+      leftSide: {
+        width: '50%'
+      },
+      rightSide: {
+        float: 'right',
+        marginTop: '-550px',
+        width: '40%'
+      }
+    });
     if (loading) {
       return (
         <div>
@@ -46,24 +67,29 @@ class DogtreatsContainer extends Component {
     } else {
       const treats =  data.allTreats.treats.map((treat) => { return treat.name });
       return (
-        <div>
-          <div>
+        <div className={css(styles.wrapper)}>
+          <div className={css(styles.lefttSide)}>
+            <img src={require('../assets/dog-1_wag.png')}></img>
+            <DogTreats />
+          </div>
+          <div className={css(styles.rightSide)}>
             <h2>Treats</h2>
             <ul>
               {data.allTreats.treats.map((treat, index) => { return (<li key={index}>{treat.name}</li>) })}
             </ul>
-          </div>
-          <div className='form-group'>
-            <span><input ref='input' onChange={(e) => this.setFieldValue(e)} /></span>
-            <span><button onClick={async () => {
-              // This is temporary until https://github.com/apollostack/react-apollo/issues/93 is done
-              this.onHandleSubmit();
-              let mutationResult = await mutations.addTreat(this.state.newTreat);
-              if (mutationResult)
-                data.refetch()
-            }}>
-              Add
-            </button></span>
+
+            <div className='form-group'>
+              <span><input ref='input' onChange={(e) => this.setFieldValue(e)} /></span>
+              <span><button onClick={async () => {
+                // This is temporary until https://github.com/apollostack/react-apollo/issues/93 is done
+                this.onHandleSubmit();
+                let mutationResult = await mutations.addTreat(this.state.newTreat);
+                if (mutationResult)
+                  data.refetch()
+              }}>
+                Add
+              </button></span>
+            </div>
           </div>
         </div>
       );
