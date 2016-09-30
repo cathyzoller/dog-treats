@@ -13,21 +13,25 @@ import fs from 'fs'
 import path from 'path'
 require('dotenv').load({ path: '.env' });
 
-let assetMap = {
-  'bundle.js': 'bundle.js'
-}
-if (process.env.NODE_ENV === 'production') {
-  assetMap = JSON.parse(
-    fs.readFileSync(
-      path.join(process.env.ASSETS_DIR, process.env.ASSETS_MAP_FILE)
-    )
-  )
-}
+
 
 export default wrap(async (req, res) => {
   const memoryHistory = createMemoryHistory(req.url)
   const store = new Store(memoryHistory)
   const history = syncHistoryWithStore(memoryHistory, store.data)
+  const lang = req.query.language;
+
+  let assetMap = {
+    'bundle.js': 'bundle.js'
+  }
+  console.log('request path', req.path);
+  if (process.env.NODE_ENV === 'production') {
+    assetMap = JSON.parse(
+      fs.readFileSync(
+        path.join(process.env.ASSETS_DIR, process.env.ASSETS_MAP_FILE)
+      )
+    )
+  }
 
   match({
     history,

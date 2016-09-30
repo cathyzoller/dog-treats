@@ -7,12 +7,12 @@ require('dotenv').load({ path: '.env' });
 const webpackPort = 3000
 const appPort = process.env.DEV_APP_PORT
 
-Object.keys(config.entry)
-.forEach((key) => {
-  config.entry[key].unshift(`webpack-dev-server/client?http://localhost:${webpackPort}/`)
-})
-
-const compiler = webpack(config)
+config.map(o => {
+  Object.keys(o.entry).forEach((key) => {
+    o.entry[key].unshift(`webpack-dev-server/client?http://localhost:${webpackPort}/`)
+  });
+});
+const compiler = webpack(config);
 const connstring = `http://localhost:${appPort}`
 
 log.info(`Proxying requests to:${connstring}`)

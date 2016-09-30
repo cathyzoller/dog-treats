@@ -1,5 +1,6 @@
-import React from 'react'
-import { StyleSheet, css } from 'aphrodite'
+import React from 'react';
+import { browserHistory } from 'react-router';
+import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
   navBar: {
@@ -7,19 +8,29 @@ const styles = StyleSheet.create({
     borderBottom: '1px grey solid',
     fontSize: '18px',
     height: '45px',
-    paddingTop: '20px',
     textAlign: 'center',
     textTransform: 'uppercase',
     width: '100%'
+  },
+  dropdown: {
+    float: 'right',
+    paddingRight: '30px'
   }
 })
 
 export default function App({ children }) {
-  console.log('children', children);
+  const handleEnglishRedirect = () => {
+    browserHistory.push('/dog-treats?language=en');
+  };
+  const handleFrenchRedirect = () => {
+    browserHistory.push('/dog-treats?language=fr');
+  }
   return (
     <div>
       <div className={css(styles.navBar)}>
-        Dog Treats
+        <h2>Dog Treats</h2>
+        <button className={css(styles.dropdown)} onClick={handleEnglishRedirect}>english </button>
+        <button className={css(styles.dropdown)} onClick={handleFrenchRedirect}>french </button>
       </div>
       {children}
     </div>

@@ -7,7 +7,7 @@ import React from 'react'
 
 export default (
   <Route path='/' component={App}>
-    <IndexRedirect to='/dog-treats' />
+    <IndexRedirect to='/dog-treats?language=en' />
     <Route path='local-counter' component={LocalCounter} />
     <Route path='remote-counter' component={RemoteCounter} />
     <Route path='dog-treats' component={DogtreatsContainer} />
