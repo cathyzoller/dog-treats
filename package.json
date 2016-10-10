@@ -4,8 +4,8 @@
   "description": "Give your dog a bone",
   "main": "src/server",
   "engines": {
-    "node": "6.2.2",
-    "npm": "3.7.3"
+    "node": "6.5.0",
+    "npm": "3.10.3"
   },
   "scripts": {
     "test": "test",
@@ -64,6 +64,7 @@
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.5",
     "redux-thunk": "^2.1.0",
+    "rollbar": "^0.6.2",
     "thinky": "^2.3.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
