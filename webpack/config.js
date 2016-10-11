@@ -36,7 +36,7 @@ const config = Object.keys(languages).map(language => {
   }));
 
   return ({
-    name: `bundle.${language}`,
+    name: `bundle-${language}`,
     entry: {
       bundle: ['babel-polyfill', path.join(__dirname, '../', 'src', 'index.jsx')]
     },
@@ -67,7 +67,7 @@ const config = Object.keys(languages).map(language => {
     },
     plugins,
     output: {
-      filename: outputFile,
+      filename: language + "-bundle.js",
       path: PATHS.build,
       publicPath: '/assets'
     }
