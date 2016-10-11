@@ -1,6 +1,6 @@
-import React from 'react';
-import { browserHistory } from 'react-router';
-import { StyleSheet, css } from 'aphrodite';
+import React from 'react'
+import { browserHistory } from 'react-router'
+import { StyleSheet, css } from 'aphrodite'
 
 const styles = StyleSheet.create({
   navBar: {
@@ -20,10 +20,12 @@ const styles = StyleSheet.create({
 
 export default function App({ children }) {
   const handleEnglishRedirect = () => {
-    browserHistory.push('/dog-treats?language=en');
-  };
+    browserHistory.push('/dog-treats?language=en')
+    window.location.href = window.location.href
+  }
   const handleFrenchRedirect = () => {
-    browserHistory.push('/dog-treats?language=fr');
+    browserHistory.push('/dog-treats?language=fr')
+    window.location.href = window.location.href
   }
   return (
     <div>
