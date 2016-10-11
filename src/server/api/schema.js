@@ -65,7 +65,7 @@ const rootResolvers = {
       throw new Error('Error message')
     },
     addTreat(_, { name }) {
-      Data.allTreats.treats.push({ name: name })
+      Data.allTreats.treats.push({ name })
       return Data.allTreats
     }
   }
