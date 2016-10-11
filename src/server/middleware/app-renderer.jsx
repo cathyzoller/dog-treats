@@ -11,27 +11,22 @@ import Store from '../../store'
 import wrap from '../wrap'
 import fs from 'fs'
 import path from 'path'
-require('dotenv').load({ path: '.env' });
-
+require('dotenv').load({ path: '.env' })
 
 
 export default wrap(async (req, res) => {
   const memoryHistory = createMemoryHistory(req.url)
   const store = new Store(memoryHistory)
   const history = syncHistoryWithStore(memoryHistory, store.data)
-  const lang = req.query.language;
 
-  let assetMap = {
-    'bundle.js': 'bundle.js'
-  }
-  console.log('request path', req.path);
-  if (process.env.NODE_ENV === 'production') {
-    assetMap = JSON.parse(
-      fs.readFileSync(
-        path.join(process.env.ASSETS_DIR, process.env.ASSETS_MAP_FILE)
-      )
-    )
-  }
+
+  // if (process.env.NODE_ENV === 'production') {
+  //   assetMap = JSON.parse(
+  //     fs.readFileSync(
+  //       path.join(process.env.ASSETS_DIR, process.env.ASSETS_MAP_FILE)
+  //     )
+  //   )
+  // }
 
   match({
     history,
@@ -43,12 +38,16 @@ export default wrap(async (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
+      const lang = req.query.language
+      let assetMap = {
+        'bundle.js': lang + '-bundle.js'
+      }
       const { html, css } = StyleSheetServer.renderStatic(() => renderToString(
-        <ApolloProvider store={store.data} client={ApolloClientSingleton}>
-          <RouterContext {...renderProps} />
-        </ApolloProvider>
+          <ApolloProvider store={store.data} client={ApolloClientSingleton}>
+            <RouterContext {...renderProps} />
+          </ApolloProvider>
+          )
         )
-      )
 
       res.send(renderIndex(html, css, assetMap, store.data))
     } else {
