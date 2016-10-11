@@ -5,8 +5,7 @@ import gql from 'graphql-tag'
 import { setTreat } from '../store/actions'
 import { StyleSheet, css } from 'aphrodite'
 
-import DogTreats from '../components/DogTreats';
-//const doggie = require('../assets/dog-1_wag.png');
+import DogTreats from '../components/DogTreats'
 
 class DogtreatsContainer extends Component {
   static propTypes = {
@@ -16,10 +15,9 @@ class DogtreatsContainer extends Component {
     handleSubmit: React.PropTypes.func.isRequired
   }
 
-  constructor(props){
-    super(props);
-    console.log('props', props);
-    this.state = { newTreat: '', loading: true };
+  constructor(props) {
+    super(props)
+    this.state = { newTreat: '', loading: true }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,18 +27,18 @@ class DogtreatsContainer extends Component {
   }
 
   setFieldValue(e) {
-    this.setState({ newTreat: e.currentTarget.value });
+    this.setState({ newTreat: e.currentTarget.value })
   }
 
   onHandleSubmit() {
-    this.props.handleSubmit(this.state.newTreat);
-    this.setState({ newTreat: '' });
-    this.refs.input.value = '';
+    this.props.handleSubmit(this.state.newTreat)
+    this.setState({ newTreat: '' })
+    this.refs.input.value = ''
   }
 
   render() {
-    const { data, mutations, addTreat, handleSubmit } = this.props;
-    const { loading } = this.state;
+    const { data, mutations, addTreat, handleSubmit } = this.props
+    const { loading } = this.state
     const styles = StyleSheet.create({
       wrapper: {
         backgroundColor: 'white',
@@ -57,15 +55,15 @@ class DogtreatsContainer extends Component {
         marginTop: '-550px',
         width: '40%'
       }
-    });
+    })
     if (loading) {
       return (
         <div>
           Loading...
         </div>
-      );
+      )
     } else {
-      const treats =  data.allTreats.treats.map((treat) => { return treat.name });
+      const treats = data.allTreats.treats.map((treat) => { return treat.name })
       return (
         <div className={css(styles.wrapper)}>
           <div className={css(styles.lefttSide)}>
@@ -82,8 +80,8 @@ class DogtreatsContainer extends Component {
               <span><input ref='input' onChange={(e) => this.setFieldValue(e)} /></span>
               <span><button onClick={async () => {
                 // This is temporary until https://github.com/apollostack/react-apollo/issues/93 is done
-                this.onHandleSubmit();
-                let mutationResult = await mutations.addTreat(this.state.newTreat);
+                this.onHandleSubmit()
+                let mutationResult = await mutations.addTreat(this.state.newTreat)
                 if (mutationResult)
                   data.refetch()
               }}>
@@ -92,10 +90,10 @@ class DogtreatsContainer extends Component {
             </div>
           </div>
         </div>
-      );
+      )
     }
   }
-};
+}
 
 const mapDispatchToProps = (dispatch) => ({
   handleSubmit: (name) => dispatch(setTreat(name))
