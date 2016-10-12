@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { routerActions } from 'react-router-redux'
+import React, { Component } from 'react'
 import { connect } from 'react-apollo'
 import gql from 'graphql-tag'
 import { setTreat } from '../store/actions'
 import { StyleSheet, css } from 'aphrodite'
+import { FormattedMessage } from 'react-intl'
 
 import DogTreats from '../components/DogTreats'
 
@@ -17,7 +17,8 @@ class DogtreatsContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { newTreat: '', loading: true }
+    const loading = props.data.loading
+    this.state = { newTreat: '', loading }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,18 +27,18 @@ class DogtreatsContainer extends Component {
     }
   }
 
-  setFieldValue(e) {
-    this.setState({ newTreat: e.currentTarget.value })
-  }
-
   onHandleSubmit() {
     this.props.handleSubmit(this.state.newTreat)
     this.setState({ newTreat: '' })
     this.refs.input.value = ''
   }
 
+  setFieldValue(e) {
+    this.setState({ newTreat: e.currentTarget.value })
+  }
+
   render() {
-    const { data, mutations, addTreat, handleSubmit } = this.props
+    const { data, mutations } = this.props
     const { loading } = this.state
     const styles = StyleSheet.create({
       wrapper: {
@@ -71,7 +72,12 @@ class DogtreatsContainer extends Component {
             <DogTreats />
           </div>
           <div className={css(styles.rightSide)}>
-            <h2>Treats</h2>
+            <h2>
+              <FormattedMessage
+                id={'dogTreats.treat'}
+                defaultMessage={'Treats'}
+              />
+            </h2>
             <ul>
               {data.allTreats.treats.map((treat, index) => { return (<li key={index}>{treat.name}</li>) })}
             </ul>

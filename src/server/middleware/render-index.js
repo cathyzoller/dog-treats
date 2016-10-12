@@ -1,4 +1,4 @@
-export default function renderIndex(html, css, assetMap, store) {
+export default function renderIndex(html, css, assetMap, store, lang, messages) {
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ export default function renderIndex(html, css, assetMap, store) {
   <body>
     <div id="mount">${html}</div>
     <script>
-      window.INITIAL_STATE = ${JSON.stringify(store.getState())}
+      window.INITIAL_STATE = ${JSON.stringify(...store.getState(), { intl: { locale: lang, messages } })}
       window.RENDERED_CLASS_NAMES = ${JSON.stringify(css.renderedClassNames)}
     </script>
     <script src="/assets/${assetMap['bundle.js']}"></script>
