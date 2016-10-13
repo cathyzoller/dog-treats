@@ -1,7 +1,7 @@
 {
   "name": "dog-treats",
   "version": "1.0.0",
-  "description": "Give your dog a bone",
+  "description": "Give your dog a steak",
   "main": "src/server",
   "engines": {
     "node": "6.5.0",
@@ -9,14 +9,14 @@
   },
   "scripts": {
     "test": "test",
-    "clean": "rm -rf ./build/client/assets",
+    "clean": "rm -rf ./build",
     "lint": "eslint --fix --ext js --ext jsx src",
     "build-langs": "./node_modules/.bin/babel-node src/utils/translator.js",
     "prod-build-client": "webpack --config ./webpack/config.js",
-    "prod-build-server": "babel ./src -d ./build --source-maps",
+    "prod-build-server": "babel ./src -d ./build/server --source-maps",
     "prod-build": "npm run clean && npm run prod-build-client && npm run prod-build-server",
     "postinstall": "if [ \"$NODE_ENV\" = production ] ; then npm run prod-build ; fi",
-    "start": "node ./build/server",
+    "start": "node ./build/server/server",
     "predev-start": "npm run clean",
     "dev-start": "nodemon -e js,jsx,md,mustache -w ./src --exec ./dev-tools/babel-run -- ./src/server",
     "dev": "nf start -w --procfile ./dev-tools/Procfile.dev"
