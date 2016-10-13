@@ -1,5 +1,5 @@
 import { updateIntl } from 'react-intl-redux'
-import { localeData } from '../../../build/locales/data.js'
+import { localeData } from '../../locales/data.js'
 
 export const SET_LOCALE = 'SET_LOCALE'
 export const ADD_TREAT = 'ADD_TREAT'

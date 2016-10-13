@@ -12,7 +12,7 @@ import Store from '../../store'
 import wrap from '../wrap'
 import fs from 'fs'
 import path from 'path'
-import { localeData } from '../../../build/locales/data.js'
+import { localeData } from '../../locales/data.js'
 require('dotenv').load({ path: '.env' })
 
 export default wrap(async (req, res) => {
@@ -42,6 +42,7 @@ export default wrap(async (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       const language = req.query.language
+      console.log('localeData', localeData)
       const messages = localeData[language]
 
       // update SSR of store based on url param...
