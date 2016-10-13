@@ -5,7 +5,7 @@ import log from '../src/log'
 require('dotenv').load({ path: '.env' })
 
 const webpackPort = 3000
-const appPort = process.env.DEV_APP_PORT
+const appPort = process.env.PORT
 
 Object.keys(config.entry).forEach((key) => {
   config.entry[key].unshift(`webpack-dev-server/client?http://localhost:${webpackPort}/`)
