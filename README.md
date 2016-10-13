@@ -5,7 +5,8 @@ An internationalized GraphQL Apollo-based application, built on top of the [Apol
 ## Internationalization
 * [react-intl](https://github.com/yahoo/react-intl)  Read the wiki for a deeper understanding of the library
 * [react-intl-redux](https://www.npmjs.com/package/react-intl-redux)
-* Don't add react-intl plugin to babelrc when using react-intl-redux and this webpack config.
+* Remove react-intl plugin from babelrc before deploying to heroku (message directories used in development only)
+* Change DEV_APP_PORT in server.js to PORT before deploying to heroku.
 * Checks language server side via url query parameter for bookmarking ability.
 
 ## GraphQL
