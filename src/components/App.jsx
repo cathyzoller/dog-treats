@@ -3,7 +3,7 @@ import { connect } from 'react-apollo'
 import { browserHistory } from 'react-router'
 import { StyleSheet, css } from 'aphrodite'
 import { setLocale } from '../store/actions'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, FormattedDate } from 'react-intl'
 
 const EN = 'en'
 const FR = 'fr'
@@ -20,6 +20,15 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     float: 'right',
+    marginRight: '15px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    textAlign: 'center'
+  },
+  rightfloat: {
+    float: 'right',
+    fontSize: '16px',
+    marginTop: '20px',
     paddingRight: '30px'
   }
 })
@@ -41,6 +50,14 @@ function App({ children, onUpdateLocale }) {
             id={'app.title'}
             defaultMessage={'Dog Treats'}
           />
+          <span className={css(styles.rightfloat)}>
+            <FormattedDate
+              value={new Date()}
+              year='numeric'
+              month='long'
+              day='2-digit'
+            />
+          </span>
         </h2>
         <button className={css(styles.dropdown)} onClick={handleEnglishRedirect}>english </button>
         <button className={css(styles.dropdown)} onClick={handleFrenchRedirect}>french </button>
