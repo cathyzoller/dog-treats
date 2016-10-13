@@ -42,7 +42,7 @@ class DogtreatsContainer extends Component {
     const { loading } = this.state
     const styles = StyleSheet.create({
       wrapper: {
-        backgroundColor: 'white',
+        backgroundColor: '#FAD2EC',
         fontSize: '18px',
         width: '100%',
         paddingLeft: '150px',
@@ -55,6 +55,11 @@ class DogtreatsContainer extends Component {
         float: 'right',
         marginTop: '-550px',
         width: '40%'
+      },
+      positionBark: {
+        marginLeft: '100px',
+        marginTop: '-150px',
+        paddingBottom: '200px',
       }
     })
     if (loading) {
@@ -69,7 +74,7 @@ class DogtreatsContainer extends Component {
         <div className={css(styles.wrapper)}>
           <div className={css(styles.lefttSide)}>
             <img src={require('../assets/dog-1_wag.png')}></img>
-            <DogTreats />
+            <div className={css(styles.positionBark)}><DogTreats /></div>
           </div>
           <div className={css(styles.rightSide)}>
             <h2>
