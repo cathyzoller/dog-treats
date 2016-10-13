@@ -1,12 +1,4 @@
 {
   "presets": ["react", "es2015", "stage-0"],
-  "only": ["*.js", "*.jsx"],
-  "plugins": [
-    [
-      "react-intl", {
-        "messagesDir": "./build/messages",
-        "enforceDescriptions": false
-      }
-    ]
-  ]
+  "only": ["*.js", "*.jsx"]
 }
