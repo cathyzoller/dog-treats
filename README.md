@@ -1,8 +1,19 @@
-# React Apollo Starter kit
+# Dog Treats
 
-This is an opinionated starter kit to start making an Apollo-based app. The goal of this starter kit is to give you an app that is ready for production. This means having proper logging, error handling, testing, bundling, asset management, and everything else out of the box. For a more barebones starter kit, check out [the official Apollo starter kit](https://github.com/apollostack/apollo-starter-kit).
+An internationalized GraphQL Apollo-based application, built on top of the [Apollo Starter Kit](https://github.com/saikat/react-apollo-starter-kit) by Saikat. View the [demo](https://dog-treats.herokuapp.com)
 
-## Stack this kit uses
+## Internationalization
+* [react-intl](https://github.com/yahoo/react-intl)  Read the wiki for a deeper understanding of the library
+* [react-intl-redux](https://www.npmjs.com/package/react-intl-redux)
+* Don't add react-intl plugin to babelrc when using react-intl-redux and this webpack config.
+* Checks language server side via url query parameter for bookmarking ability.
+
+## GraphQL
+* [graphiql](https://dog-treats.herokuapp.com/graphql) allows you to play with the mocks used in this app.
+* Use casual for mock data:  `npm install casual`
+* App uses the Apollo Client (built with redux) for data-batching and normalization.
+
+## Stack
 * [React](https://facebook.github.io/react/) for frontend development
 * [GraphQL](http://graphql.org/) for backend API
 * [Apollo](http://apollostack.com) for backend/frontend data flow management
@@ -18,7 +29,7 @@ This is an opinionated starter kit to start making an Apollo-based app. The goal
 * [ESLint](http://eslint.org/) to keep your Javascript style consistent
 * [Babel](https://babeljs.io/) to use the latest Javascript language features
 
-## Other features of this kit
+## Other features
 * Automatic asset versioning so that you can aggressively cache your assets in production
 * Server side rendering out of the box
 * Custom Apollo network interface that lets you add middleware to handle responses from GraphQL. This would be a good place to put any error handling that you want to do globally (e.g. unexpected errors from GraphQL, user authorization or authentication errors, etc.).
@@ -28,7 +39,7 @@ This is an opinionated starter kit to start making an Apollo-based app. The goal
     * Unexpected exceptions in non-GraphQL server-side code: log.error + crash the server. In dev, nodemon will wait for changes to restart the server. In production, you should handle restarting the server (e.g. set Heroku to auto-restart dynos on a crash).
     * Unexpected exceptions in GraphQL code: log.error. This happens via a response middleware that is easily changeable.
 
-## Making and deploying a new app with this kit
+## Making and deploying a new app
 1. Install [Node.js](https://nodejs.org/).
 1. Clone this starter kit
 1. Change the git remote to point to your new project's repo with `git remote set-url origin <new-url>`
