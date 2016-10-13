@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 
@@ -6,16 +6,19 @@ require('babel-polyfill');
 require('dotenv').load({ path: '.env' })
 
 const DEBUG = process.env.NODE_ENV !== 'production'
-
-const PATHS = {
-  app: path.join(__dirname, '../', 'src'),
-  build: path.join(__dirname, '../', process.env.ASSETS_DIR)
-};
-const plugins = [];
-
 const assetsDir = process.env.ASSETS_DIR
 const assetMapFile = process.env.ASSETS_MAP_FILE
 const outputFile = DEBUG ? '[name].js' : '[name].[chunkhash].js'
+
+const PATHS = {
+  app: path.join(__dirname, '../', 'src'),
+  build:  DEBUG ? '/' : path.join(__dirname, '../', assetsDir)
+};
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+  })
+];
 
 if (!DEBUG) {
   plugins.push(new ManifestPlugin({
@@ -25,7 +28,6 @@ if (!DEBUG) {
 }
 
 const config = {
-  name: 'bundle',
   entry: {
     bundle: ['babel-polyfill', path.join(__dirname, '../', 'src', 'index.jsx')]
   },
@@ -51,7 +53,7 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['', '.js', '.jsx'],
     root: PATHS.app
   },
   plugins,
@@ -59,11 +61,10 @@ const config = {
     filename: outputFile,
     path: PATHS.build,
     publicPath: '/assets'
-  },
-  target: 'web', // Make web variables accessible to webpack, e.g. window
-  stats: true, // show stats in the console
-  progress: true
+  }
 };
+
+console.log(process.env.NODE_ENV);
 
 if (DEBUG) {
   config.devtool = '#inline-source-map'

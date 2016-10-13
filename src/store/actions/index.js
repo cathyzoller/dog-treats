@@ -2,12 +2,7 @@ import { updateIntl } from 'react-intl-redux'
 import { localeData } from '../../../build/locales/data.js'
 
 export const SET_LOCALE = 'SET_LOCALE'
-export const ADD_COUNT = 'ADD_COUNT'
 export const ADD_TREAT = 'ADD_TREAT'
-
-export const addCount = (amount) => {
-  return { type: ADD_COUNT, amount }
-}
 
 export const setTreat = (name) => (
   (dispatch, getState) => {
