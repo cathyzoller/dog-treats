@@ -9,14 +9,14 @@
   },
   "scripts": {
     "test": "test",
-    "clean": "rm -rf $OUTPUT_DIR/client/assets/*",
+    "clean": "rm -rf ./build/client/assets",
     "lint": "eslint --fix --ext js --ext jsx src",
     "build-langs": "./node_modules/.bin/babel-node src/utils/translator.js",
     "prod-build-client": "webpack --config ./webpack/config.js",
-    "prod-build-server": "babel ./src -d $OUTPUT_DIR --source-maps",
+    "prod-build-server": "babel ./src -d ./build --source-maps",
     "prod-build": "npm run clean && npm run prod-build-client && npm run prod-build-server",
     "postinstall": "if [ \"$NODE_ENV\" = production ] ; then npm run prod-build ; fi",
-    "start": "node ./dev-tools/babel-run ./src/server",
+    "start": "node ./build/server",
     "predev-start": "npm run clean",
     "dev-start": "nodemon -e js,jsx,md,mustache -w ./src --exec ./dev-tools/babel-run -- ./src/server",
     "dev": "nf start -w --procfile ./dev-tools/Procfile.dev"

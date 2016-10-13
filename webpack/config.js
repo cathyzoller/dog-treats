@@ -59,10 +59,7 @@ const config = {
     filename: outputFile,
     path: PATHS.build,
     publicPath: '/assets'
-  },
-  target: 'web', // Make web variables accessible to webpack, e.g. window
-  stats: true, // show stats in the console
-  progress: true
+  }
 };
 
 if (DEBUG) {
