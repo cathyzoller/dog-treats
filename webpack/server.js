@@ -4,7 +4,7 @@ import config from './config'
 import log from '../src/log'
 require('dotenv').load({ path: '.env' })
 
-const webpackPort = 3000
+const webpackPort = 3030
 const appPort = process.env.DEV_APP_PORT
 
 Object.keys(config.entry).forEach((key) => {
@@ -13,7 +13,7 @@ Object.keys(config.entry).forEach((key) => {
 const compiler = webpack(config)
 const connstring = `http://localhost:${appPort}`
 
-log.info(`Proxying requests to:${connstring}`)
+console.log(`Proxying requests to:${connstring}`)
 
 const app = new WebpackDevServer(compiler, {
   contentBase: '/assets/',
@@ -26,5 +26,5 @@ const app = new WebpackDevServer(compiler, {
 })
 
 app.listen(webpackPort, () => {
-  log.info(`Webpack dev server is now running on http://localhost:${webpackPort}`)
+  console.log(`Webpack dev server is now running on http://localhost:${webpackPort}`)
 })

@@ -2,11 +2,11 @@ import log from './log'
 
 export default (error) => {
   if (!error) {
-    log.error('Uncaught exception with null error object')
+    console.log('Uncaught exception with null error object')
     return
   }
 
-  log.error(error)
+  console.log(error)
 
   if (window.location.href.split('/')[2].split(':')[0] !== 'localhost') {
     setTimeout(() => {
