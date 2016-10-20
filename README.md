@@ -1,18 +1,20 @@
 # Dog Treats
 
-An internationalized GraphQL Apollo-based application, built on top of the [Apollo Starter Kit](https://github.com/saikat/react-apollo-starter-kit) by Saikat. View the [demo](https://dog-treats.herokuapp.com)
+An internationalized GraphQL Apollo-based application, built on top of the [Apollo Starter Kit](https://github.com/saikat/react-apollo-starter-kit) by Saikat. View the [demo](https://dog-treats.herokuapp.com).  Versioning corresponds to the version of Apollo Server being used, currently 0.3.2
 
 ## Internationalization
 * [react-intl](https://github.com/yahoo/react-intl)  Read the wiki for a deeper understanding of the library
 * [react-intl-redux](https://www.npmjs.com/package/react-intl-redux)
-* Remove react-intl plugin from babelrc before deploying to heroku (message directories used in development only)
-* Change DEV_APP_PORT in server.js to PORT before deploying to heroku.
 * Checks language server side via url query parameter for bookmarking ability.
 
 ## GraphQL
 * [graphiql](https://dog-treats.herokuapp.com/graphql) allows you to play with the mocks used in this app.
 * Use casual for mock data:  `npm install casual`
 * App uses the Apollo Client (built with redux) for data-batching and normalization.
+
+## Heroku Deployment tweaks
+* Remove react-intl plugin from babelrc before deploying to heroku (message directories used in development only)
+* Change DEV_APP_PORT in server.js to PORT before deploying to heroku.
 
 ## Stack
 * [React](https://facebook.github.io/react/) for frontend development
@@ -24,7 +26,6 @@ An internationalized GraphQL Apollo-based application, built on top of the [Apol
 * [Express](http://expressjs.com/) for the server
 * [Webpack](https://webpack.github.io/) for development server + hot reloading clientside stuff
 * [Nodemon](https://github.com/remy/nodemon) for hot reloading backend code
-* [Rollbar](https://rollbar.com) for production error handling
 * [Minilog](https://github.com/mixu/minilog) for client and server logging
 * [Node-foreman](https://github.com/strongloop/node-foreman) for running both the Webpack server and Express server
 * [ESLint](http://eslint.org/) to keep your Javascript style consistent
@@ -34,11 +35,7 @@ An internationalized GraphQL Apollo-based application, built on top of the [Apol
 * Automatic asset versioning so that you can aggressively cache your assets in production
 * Server side rendering out of the box
 * Custom Apollo network interface that lets you add middleware to handle responses from GraphQL. This would be a good place to put any error handling that you want to do globally (e.g. unexpected errors from GraphQL, user authorization or authentication errors, etc.).
-* Sane handling of unexpected exceptions:
-    * Calls to log.error in client/server will log the error to the console/stdout and also send it to Rollbar.
-    * Unexpected exceptions in client-side code (including within asynchronous code): log.error + force refresh the app after an alert to the user
-    * Unexpected exceptions in non-GraphQL server-side code: log.error + crash the server. In dev, nodemon will wait for changes to restart the server. In production, you should handle restarting the server (e.g. set Heroku to auto-restart dynos on a crash).
-    * Unexpected exceptions in GraphQL code: log.error. This happens via a response middleware that is easily changeable.
+* Error handling by Rollbar has been removed in this version, due to fs module not found error.
 
 ## Making and deploying a new app
 1. Install [Node.js](https://nodejs.org/).
