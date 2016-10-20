@@ -38,10 +38,6 @@ addMockFunctionsToSchema({
 // Don't rate limit heroku
 app.enable('trust proxy')
 
-// Parse bodies as JSON
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
 // In development, we use webpack server
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(process.env.PUBLIC_DIR, {
@@ -49,11 +45,11 @@ if (process.env.NODE_ENV === 'production') {
   }))
 }
 
-// `context` must be an object and can't be undefined when using connectors
-app.use('/graphql', bodyParser.json(), apolloExpress(request => ({
+app.use('/graphql', bodyParser.json(), apolloExpress({
   schema: executableSchema,
-  context: { } //{ user: request.session.user }
-})))
+  context: {}, //at least(!) an empty object
+}));
+
 
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
@@ -63,5 +59,5 @@ app.use('/graphiql', graphiqlExpress({
 app.use(appRenderer)
 app.listen(port, () => {
   //log.info(`Node app is running on port ${port}`)
-  console.log(`Node app is running on port ${port}`)
+  //log.info(`Node app is running on port ${port}`)
 })
