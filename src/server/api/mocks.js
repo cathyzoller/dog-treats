@@ -11,13 +11,23 @@ const mocks = {
     lastName: () => casual.last_name,
     dogs: () => new MockList([1, 3])
   }),
+  Walker: () => ({
+    firstName: () => casual.first_name,
+    lastName: () => casual.last_name
+  }),
   Dog: () => ({
     name: () => casual.word,
-    treats: () => new MockList([1, 6], () => casual.word)
+    dogTreats: () => new MockList([1, 6], () => casual.word)
   }),
   RootQuery: () => ({
     owner: (o, args) => {
       if (casual.integer(1, 10) > 8) {
+        return null
+      }
+      return { ...args }
+    },
+    walker: (o, args) => {
+      if (casual.integer(1,10) > 8) {
         return null
       }
       return { ...args }

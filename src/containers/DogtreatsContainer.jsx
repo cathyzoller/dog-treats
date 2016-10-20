@@ -69,7 +69,6 @@ class DogtreatsContainer extends Component {
         </div>
       )
     } else {
-      const treats = data.allTreats.treats.map((treat) => { return treat.name })
       return (
         <div className={css(styles.wrapper)}>
           <div className={css(styles.lefttSide)}>
@@ -84,6 +83,7 @@ class DogtreatsContainer extends Component {
               />
             </h2>
             <ul>
+              {data.favoriteTreats.treats.map((treat, index) => { return (<li key={index}>{treat.name}</li>) })}
               {data.allTreats.treats.map((treat, index) => { return (<li key={index}>{treat.name}</li>) })}
             </ul>
 
@@ -114,6 +114,11 @@ const mapQueriesToProps = () => ({
   data: {
     query: gql`
       {
+        favoriteTreats {
+          treats {
+            name
+          }
+        }
         allTreats {
           treats {
             name

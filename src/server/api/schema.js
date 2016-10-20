@@ -1,13 +1,15 @@
 import { schema as countSchema, resolvers as countResolvers } from './count'
+//import { schema as apiSchema, resolvers as apiResolvers } from './restApis'
 import Data from './data'
+import { FavoriteTreats, FortuneCookie } from './sql/connector';
 
 const rootSchema = `
   type AllOwners {
     owners: [Owner]
   }
 
-  type AllTreats {
-    treats: [Treat]
+  type AllWalkers {
+    walkers: [Walker]
   }
 
   type Owner {
@@ -18,25 +20,37 @@ const rootSchema = `
     dogs: [Dog]
   }
 
+  type Walker {
+    id: Int!
+    firstName: String
+    lastName: String
+    allWalkers: AllWalkers
+  }
+
   type Dog {
     id: Int!
     name: String
-    treats: [Treat]
     owner: Owner
   }
 
+  type AllTreats {
+    treats: [Treat]
+  }
+
   type Treat {
-    id: Int!
-    name: String
-    allTreats: AllTreats
+    name: String!
   }
 
   type RootQuery {
     count: Count
+    favoriteTreats: AllTreats
     allTreats: AllTreats
     allOwners: AllOwners
+    allWalkers: AllWalkers
     owner: Owner
+    walker: Walker
     dog: Dog
+    fortuneCookie: String
   }
 
   type RootMutation {
@@ -53,8 +67,16 @@ const rootSchema = `
 
 const rootResolvers = {
   RootQuery: {
-    count: () => Data.count,
-    allTreats: () => Data.allTreats
+    count() { return Data.count },
+    favoriteTreats() {
+      return FavoriteTreats.getAll();
+    },
+    allTreats() {
+      return Data.allTreats;
+    },
+    fortuneCookie() {
+      return FortuneCookie.getOne();
+    }
   },
   RootMutation: {
     addCount(_, { amount }) {
